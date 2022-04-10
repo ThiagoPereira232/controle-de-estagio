@@ -122,5 +122,75 @@ namespace Estagio.bd
                 return false;
             }
         }
+
+        public bool verificaExiste(string keyDigitada)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            MySqlCommand cmd = new MySqlCommand();
+            DataTable key = new DataTable();
+            try
+            {
+                Abrir();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "select status from ativacao where keyCode = @keyCode";
+                cmd.Parameters.AddWithValue("@keyCode", keyDigitada);
+                cmd.Connection = Connection;
+                da.SelectCommand = cmd;
+                da.Fill(key);
+                Fechar();
+                String status = (key.Rows[0].ItemArray[0]).ToString();
+                if (status == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
+        public bool verificaUsando(string keyDigitada)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            MySqlCommand cmd = new MySqlCommand();
+            DataTable key = new DataTable();
+            try
+            {
+                Abrir();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "select status from ativacao where keyCode = @keyCode";
+                cmd.Parameters.AddWithValue("@keyCode", keyDigitada);
+                cmd.Connection = Connection;
+                da.SelectCommand = cmd;
+                da.Fill(key);
+                Fechar();
+                String status = (key.Rows[0].ItemArray[0]).ToString();
+                if (status == "0")
+                {
+                    return false;
+                }
+                else if(status == "2")
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
     }
 }

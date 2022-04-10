@@ -144,9 +144,16 @@ namespace Estagio.bd
                 da.Fill(horaBd);
                 Fechar();
                 String hora = (horaBd.Rows[0].ItemArray[0]).ToString();
-                TimeSpan horaTs = TimeSpan.Parse(hora);
-                ts += horaTs;
-                e.TotalHoras = DateTime.Parse(ts.ToString());
+                if(hora != null)
+                {
+                    TimeSpan horaTs = TimeSpan.Parse(hora);
+                    ts += horaTs;
+                    e.TotalHoras = DateTime.Parse(ts.ToString());
+                }
+                else
+                {
+                    e.TotalHoras = DateTime.Parse("00:00:00");
+                }
             }
             catch (Exception ex)
             {

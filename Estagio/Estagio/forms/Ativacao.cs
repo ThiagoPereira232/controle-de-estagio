@@ -24,15 +24,31 @@ namespace Estagio.forms
 
         private void btnAtivar_Click(object sender, EventArgs e)
         {
-            string path = @".\key.txt";
-            StreamWriter writer = new StreamWriter(path);
-            string key = txtKey.Text;
-            writer.WriteLine(key);
-            writer.Close();
-            bd.atualiza(key);
-            TabelaEstagio f = new TabelaEstagio(MdiParent);
-            f.Show();
-            Close();
+            if (bd.verificaExiste(txtKey.Text))
+            {
+                if (!bd.verificaUsando(txtKey.Text))
+                {
+                    string path = @".\key.txt";
+                    StreamWriter writer = new StreamWriter(path);
+                    string key = txtKey.Text;
+                    writer.WriteLine(key);
+                    writer.Close();
+                    bd.atualiza(key);
+                    TabelaEstagio f = new TabelaEstagio(MdiParent);
+                    f.Show();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Chave de ativação em uso");
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Chave de ativação não existe");
+            }
+            
         }
     }
 }
