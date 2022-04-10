@@ -47,7 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bd\Bd.cs" />
+    <Compile Include="bd\BdAluno.cs" />
     <Compile Include="bd\BdEstagio.cs" />
+    <Compile Include="forms\Ativacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Ativacao.Designer.cs">
+      <DependentUpon>Ativacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\CadastraDia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +81,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="forms\Ativacao.resx">
+      <DependentUpon>Ativacao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\CadastraDia.resx">
       <DependentUpon>CadastraDia.cs</DependentUpon>
     </EmbeddedResource>

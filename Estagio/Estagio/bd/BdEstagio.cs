@@ -8,16 +8,20 @@ namespace Estagio.bd
 {
     internal class BdEstagio : Bd
     {
+        BdAluno bdAluno;
         public BdEstagio()
         {
             User = "root";
             Servidor = "localhost";
             Senha = "vertrigo";
             bd = "estagio";
+
+            bdAluno = new BdAluno();
         }
 
         public DataTable PreencheTabela()
         {
+            int id = bdAluno.getIdAluno();
             MySqlDataAdapter da = new MySqlDataAdapter();
             MySqlCommand cmd = new MySqlCommand();
             DataTable estagio = new DataTable();
@@ -25,7 +29,8 @@ namespace Estagio.bd
             {
                 Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from estagiodias order by data";
+                cmd.CommandText = "select * from estagiodias where idAluno = @idAluno order by data";
+                cmd.Parameters.AddWithValue("@idAluno", id);
                 cmd.Connection = Connection;
                 da.SelectCommand = cmd;
                 da.Fill(estagio);
@@ -48,18 +53,20 @@ namespace Estagio.bd
 
         private void inserir(EstagioDias e)
         {
+            int id = bdAluno.getIdAluno();
             MySqlDataAdapter da = new MySqlDataAdapter();
             MySqlCommand cmd = new MySqlCommand();
             try
             {
                 Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "insert into estagiodias (id, data, descricao, horaIni, horaFin) values (@id, @data, @descricao, @horaIni, @horaFin)";
+                cmd.CommandText = "insert into estagiodias (id, data, descricao, horaIni, horaFin, idAluno) values (@id, @data, @descricao, @horaIni, @horaFin, @idAluno)";
                 cmd.Parameters.AddWithValue("@id", e.Id);
                 cmd.Parameters.AddWithValue("@data", e.Data);
                 cmd.Parameters.AddWithValue("@descricao", e.Descricao);
                 cmd.Parameters.AddWithValue("@horaIni", e.HoraIni);
-                cmd.Parameters.AddWithValue("@horaFin", e.HoraFin);
+                cmd.Parameters.AddWithValue("@horaFin", e.HoraFin); 
+                cmd.Parameters.AddWithValue("@idAluno", id);
                 cmd.Connection = Connection;
                 da.UpdateCommand = cmd;
                 da.UpdateCommand.ExecuteNonQuery();
@@ -72,15 +79,17 @@ namespace Estagio.bd
 
         private void inserirHoras(EstagioDias e)
         {
+            int id = bdAluno.getIdAluno();
             MySqlDataAdapter da = new MySqlDataAdapter();
             MySqlCommand cmd = new MySqlCommand();
             try
             {
                 Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "insert into horas (id, total) values (@id, @horas)";
+                cmd.CommandText = "insert into horas (id, total, idAluno) values (@id, @horas, @idAluno)";
                 cmd.Parameters.AddWithValue("@id", e.Id);
                 cmd.Parameters.AddWithValue("@horas", e.HoraFin - e.HoraIni);
+                cmd.Parameters.AddWithValue("@idAluno", id);
                 cmd.Connection = Connection;
                 da.UpdateCommand = cmd;
                 da.UpdateCommand.ExecuteNonQuery();
@@ -94,6 +103,7 @@ namespace Estagio.bd
 
         private void atualizaHoras(EstagioDias e)
         {
+            int id = bdAluno.getIdAluno();
             MySqlDataAdapter da = new MySqlDataAdapter();
             MySqlCommand cmd = new MySqlCommand();
             try
@@ -101,8 +111,9 @@ namespace Estagio.bd
                 somaHora(e);
                 Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "update horas set total = @horas";
+                cmd.CommandText = "update horas set total = @horas where idAluno = @idAluno";
                 cmd.Parameters.AddWithValue("@horas", e.TotalHoras.ToString("HH:mm:ss"));
+                cmd.Parameters.AddWithValue("@idAluno", id);
                 cmd.Connection = Connection;
                 da.UpdateCommand = cmd;
                 da.UpdateCommand.ExecuteNonQuery();
@@ -116,6 +127,7 @@ namespace Estagio.bd
 
         private void somaHora(EstagioDias e)
         {
+            int id = bdAluno.getIdAluno();
             TimeSpan ts = e.HoraFin - e.HoraIni;
             MySqlDataAdapter da = new MySqlDataAdapter();
             MySqlCommand cmd = new MySqlCommand();
@@ -125,7 +137,8 @@ namespace Estagio.bd
             {
                 Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select total from horas";
+                cmd.CommandText = "select total from horas where idAluno = @idAluno";
+                cmd.Parameters.AddWithValue("@idAluno", id);
                 cmd.Connection = Connection;
                 da.SelectCommand = cmd;
                 da.Fill(horaBd);
@@ -143,6 +156,7 @@ namespace Estagio.bd
 
         private bool VerificaHoras(EstagioDias e)
         {
+            int id = bdAluno.getIdAluno();
             MySqlDataAdapter da = new MySqlDataAdapter();
             MySqlCommand cmd = new MySqlCommand();
             DataTable qtd = new DataTable();
@@ -150,7 +164,8 @@ namespace Estagio.bd
             {
                 Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT * FROM horas";
+                cmd.CommandText = "SELECT * FROM horas where idAluno = @idAluno";
+                cmd.Parameters.AddWithValue("@idAluno", id);
                 cmd.Connection = Connection;
                 da.SelectCommand = cmd;
                 da.Fill(qtd);
@@ -173,6 +188,7 @@ namespace Estagio.bd
 
         public TimeSpan HorasFeitas()
         {
+            int id = bdAluno.getIdAluno();
             MySqlDataAdapter da = new MySqlDataAdapter();
             MySqlCommand cmd = new MySqlCommand();
             DataTable totalHoras = new DataTable();
@@ -180,7 +196,8 @@ namespace Estagio.bd
             {
                 Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select total from horas";
+                cmd.CommandText = "select total from horas where idAluno = @idAluno";
+                cmd.Parameters.AddWithValue("@idAluno", id);
                 cmd.Connection = Connection;
                 da.SelectCommand = cmd;
                 da.Fill(totalHoras);

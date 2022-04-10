@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Estagio.bd;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,12 @@ namespace Estagio.forms
 {
     public partial class EstagioMdi : Form
     {
+        BdAluno bd;
         bool formActivated = true;
         public EstagioMdi()
         {
             InitializeComponent();
+            bd = new BdAluno();
             HorizontalScroll.Visible = false;
         }
 
@@ -23,10 +26,20 @@ namespace Estagio.forms
         {
             if (formActivated)
             {
-                formActivated = false;
-                TabelaEstagio te = new TabelaEstagio(this);
-                te.StartPosition = FormStartPosition.CenterScreen;
-                te.Show();
+                if (bd.verificaKey())
+                {
+                    formActivated = false;
+                    TabelaEstagio te = new TabelaEstagio(this);
+                    te.StartPosition = FormStartPosition.CenterScreen;
+                    te.Show();
+                }
+                else
+                {
+                    formActivated = false;
+                    Ativacao te = new Ativacao(this);
+                    te.StartPosition = FormStartPosition.CenterScreen;
+                    te.Show();
+                }
             }
         }
     }
