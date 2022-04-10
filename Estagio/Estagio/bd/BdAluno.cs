@@ -10,9 +10,9 @@ namespace Estagio.bd
     {
         public BdAluno()
         {
-            User = "root";
-            Servidor = "localhost";
-            Senha = "vertrigo";
+            User = "thiagopereira232";
+            Servidor = "db4free.net";
+            Senha = "y%dazBB%";
             bd = "estagio";
         }
 
@@ -124,8 +124,7 @@ namespace Estagio.bd
             MySqlDataAdapter da = new MySqlDataAdapter();
             MySqlCommand cmd = new MySqlCommand();
             DataTable key = new DataTable();
-            try
-            {
+            
                 Abrir();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = "select status from ativacao where keyCode = @keyCode";
@@ -144,12 +143,6 @@ namespace Estagio.bd
                     return true;
                 }
 
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.Message);
-                return false;
-            }
         }
 
         public bool verificaUsando(string keyDigitada)

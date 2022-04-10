@@ -11,9 +11,9 @@ namespace Estagio.bd
         BdAluno bdAluno;
         public BdEstagio()
         {
-            User = "root";
-            Servidor = "localhost";
-            Senha = "vertrigo";
+            User = "thiagopereira232";
+            Servidor = "db4free.net";
+            Senha = "y%dazBB%";
             bd = "estagio";
 
             bdAluno = new BdAluno();
