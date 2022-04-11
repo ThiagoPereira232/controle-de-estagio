@@ -11,9 +11,9 @@ namespace Estagio.bd
         BdAluno bdAluno;
         public BdEstagio()
         {
-            User = "thiagopereira232";
-            Servidor = "db4free.net";
-            Senha = "y%dazBB%";
+            User = "root";
+            Servidor = "localhost";
+            Senha = "vertrigo";
             bd = "estagio";
 
             bdAluno = new BdAluno();
@@ -120,6 +120,28 @@ namespace Estagio.bd
                 Fechar();
             }
             catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void deletar(int idEstagio)
+        {
+            int idAluno = bdAluno.getIdAluno();
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            MySqlCommand cmd = new MySqlCommand();
+            try
+            {
+                Abrir();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "delete from estagiodias where id = @id and idAluno = @idAluno";
+                cmd.Parameters.AddWithValue("@idAluno", idAluno);
+                cmd.Parameters.AddWithValue("@id", idEstagio);
+                cmd.Connection = Connection;
+                da.UpdateCommand = cmd;
+                da.UpdateCommand.ExecuteNonQuery();
+                Fechar();
+            } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

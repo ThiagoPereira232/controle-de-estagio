@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnNovo = new System.Windows.Forms.Button();
             this.dgFiltro = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.data = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,18 +36,13 @@
             this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.txtHoras = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bNovo = new System.Windows.Forms.ToolStripMenuItem();
+            this.bExcluir = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgFiltro)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnNovo
-            // 
-            this.btnNovo.Location = new System.Drawing.Point(16, 12);
-            this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(75, 23);
-            this.btnNovo.TabIndex = 8;
-            this.btnNovo.Text = "Novo";
-            this.btnNovo.UseVisualStyleBackColor = true;
-            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // dgFiltro
             // 
@@ -118,6 +112,39 @@
             this.txtHoras.TabIndex = 13;
             this.txtHoras.Text = "00:00:00";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.arquivoToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(634, 24);
+            this.menuStrip1.TabIndex = 14;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // arquivoToolStripMenuItem
+            // 
+            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bNovo,
+            this.bExcluir});
+            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
+            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.arquivoToolStripMenuItem.Text = "Arquivo";
+            // 
+            // bNovo
+            // 
+            this.bNovo.Name = "bNovo";
+            this.bNovo.Size = new System.Drawing.Size(180, 22);
+            this.bNovo.Text = "Novo";
+            this.bNovo.Click += new System.EventHandler(this.bNovo_Click);
+            // 
+            // bExcluir
+            // 
+            this.bExcluir.Name = "bExcluir";
+            this.bExcluir.Size = new System.Drawing.Size(180, 22);
+            this.bExcluir.Text = "Excluir";
+            this.bExcluir.Click += new System.EventHandler(this.bExcluir_Click);
+            // 
             // TabelaEstagio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -125,21 +152,23 @@
             this.ClientSize = new System.Drawing.Size(634, 432);
             this.Controls.Add(this.txtHoras);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnNovo);
             this.Controls.Add(this.dgFiltro);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "TabelaEstagio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tabela Estagio";
             this.Load += new System.EventHandler(this.TabelaEstagio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgFiltro)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.DataGridView dgFiltro;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn data;
@@ -148,5 +177,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tipo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label txtHoras;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bNovo;
+        private System.Windows.Forms.ToolStripMenuItem bExcluir;
     }
 }

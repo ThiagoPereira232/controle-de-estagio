@@ -10,9 +10,9 @@ namespace Estagio.bd
     {
         public BdAluno()
         {
-            User = "thiagopereira232";
-            Servidor = "db4free.net";
-            Senha = "y%dazBB%";
+            User = "root";
+            Servidor = "localhost";
+            Senha = "vertrigo";
             bd = "estagio";
         }
 
