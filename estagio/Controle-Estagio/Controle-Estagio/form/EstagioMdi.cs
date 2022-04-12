@@ -26,7 +26,6 @@ namespace Controle_Estagio.form
                     TabelaEstagio te = new TabelaEstagio(this);
                     te.StartPosition = FormStartPosition.CenterScreen;
                     te.Show();
-                    Close();
                 }
                 else
                 {
@@ -34,7 +33,6 @@ namespace Controle_Estagio.form
                     Ativacao te = new Ativacao(this);
                     te.StartPosition = FormStartPosition.CenterScreen;
                     te.Show();
-                    Close();
                 }
             }
             
